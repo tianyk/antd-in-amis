@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antd</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/amis@1.4.0/sdk/antd.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/amis@1.4.0/sdk/sdk.js"></script>
+    <style>
+        .amis-scope {
+            min-height: 1024px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="amis"></div>
+
+    <script>
+        const amis = amisRequire('amis/embed');
+        amis.embed('#amis', {
+            type: 'page',
+            title: 'Amis Antd',
+            data: {
+                links: [
+                    {
+                        title: {
+                            type: 'tpl',
+                            tpl: 'xxx',
+                            "badge": {
+                                "mode": "text",
+                                "text": 2,
+                                // animation: true,
+                                "offset": [
+                                    10,
+                                    8
+                                ]
+                            },
+                        },
+                        key: '#A'
+                    },
+                    {
+                        title: 'B',
+                        key: '#B'
+                    },
+                    {
+                        title: {
+                            type: 'tpl',
+                            tpl: 'C'
+                        },
+                        key: '#C',
+                        children: [
+                            {
+                                title: 'C1',
+                                key: '#C1'
+                            }
+                        ]
+                    },
+                ]
+            },
+            aside: {
+                type: 'ant-menu',
+                source: '${links}',
+                options: {
+                    mode: 'inline',
+                }
+            },
+            body: [
+                {
+                    type: 'ant-button',
+                    body: '点击'
+                },
+                {
+                    type: 'ant-back-top',
+                    options: {
+                        visibilityHeight: 1
+                    }
+                },
+                {
+                    type: 'ant-space',
+                    options: {
+                        align: 'center',
+                        direction: 'horizontal'
+                    },
+                    body: [
+                        {
+                            type: 'button',
+                            label: 'Amis'
+                        },
+                        {
+                            type: 'ant-button',
+                            body: 'Ant'
+                        },
+                        "ABD"
+                    ]
+                }
+            ]
+        }, {}, { theme: 'antd' });
+    </script>
+</body>
+
+</html>

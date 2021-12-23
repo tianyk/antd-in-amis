@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "sourceMap": true,
+        "module": "esnext",
+        "target": "ES5",
+        "jsx": "react",
+        "allowJs": true,
+        "strictNullChecks": true,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "noUnusedLocals": false,
+        "noImplicitAny": true,
+        "lib": [
+            "dom",
+            "es2017"
+        ],
+        "skipLibCheck": true,
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
