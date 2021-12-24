@@ -5,6 +5,7 @@ const pkg = require('./package.json');
 
 module.exports = (env, args) => {
     return {
+        entry: './src/a.js',
         output: {
             filename: `antd${args.mode === 'production' ? '.min' : ''}.js`
         },
