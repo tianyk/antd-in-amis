@@ -10,6 +10,7 @@ specifiers:
   amis: 1.4.0
   antd: ^4.17.3
   babel-loader: ^8.2.3
+  classnames: ^2.3.1
   core-js: ^3.20.0
   css-loader: ^6.5.1
   html-webpack-plugin: ^5.5.0
@@ -29,6 +30,7 @@ specifiers:
 dependencies:
   amis: 1.4.0
   antd: 4.17.3_react-dom@16.14.0+react@16.14.0
+  classnames: mirrors.tencent.com/classnames/2.3.1
   lodash: mirrors.tencent.com/lodash/4.17.21
   react: mirrors.tencent.com/react/16.14.0
   react-dom: mirrors.tencent.com/react-dom/16.14.0_react@16.14.0
@@ -2359,6 +2361,14 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
+  /image-size/0.5.5:
+    resolution: {integrity: sha1-Cd/Uq50g4p6xw+gLiZA3jfnjy5w=}
+    engines: {node: '>=0.10.0'}
+    hasBin: true
+    requiresBuild: true
+    dev: true
+    optional: true
+
   /import-local/3.0.3:
     resolution: {integrity: sha512-bE9iaUY3CXH8Cwfan/abDKAxe1KGT9kyGsBPqf6DMK/z0a2OzAsrukeYNgIH6cH5Xr452jb1TUL8rSfCLjZ9uA==}
     engines: {node: '>=8'}
@@ -2549,7 +2559,7 @@ packages:
     optionalDependencies:
       errno: mirrors.tencent.com/errno/0.1.8
       graceful-fs: mirrors.tencent.com/graceful-fs/4.2.8
-      image-size: mirrors.tencent.com/image-size/0.5.5
+      image-size: 0.5.5
       make-dir: mirrors.tencent.com/make-dir/2.1.0
       mime: mirrors.tencent.com/mime/1.6.0
       needle: mirrors.tencent.com/needle/2.9.1
@@ -4876,16 +4886,6 @@ packages:
     name: ieee754
     version: 1.2.1
     dev: false
-
-  mirrors.tencent.com/image-size/0.5.5:
-    resolution: {integrity: sha1-Cd/Uq50g4p6xw+gLiZA3jfnjy5w=, registry: http://mirrors.cloud.tencent.com/npm/, tarball: https://mirrors.tencent.com/npm/image-size/-/image-size-0.5.5.tgz}
-    name: image-size
-    version: 0.5.5
-    engines: {node: '>=0.10.0'}
-    hasBin: true
-    requiresBuild: true
-    dev: true
-    optional: true
 
   mirrors.tencent.com/immediate/3.0.6:
     resolution: {integrity: sha1-nbHb0Pr43m++D13V5Wu2BigN5ps=, registry: http://mirrors.cloud.tencent.com/npm/, tarball: https://mirrors.tencent.com/npm/immediate/-/immediate-3.0.6.tgz}

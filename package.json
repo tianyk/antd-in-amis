@@ -18,6 +18,7 @@
     "dependencies": {
         "amis": "1.4.0",
         "antd": "^4.17.3",
+        "classnames": "^2.3.1",
         "lodash": "^4.17.21",
         "react": "^16.14.0",
         "react-dom": "^16.14.0"
