@@ -30,11 +30,12 @@ interface MyPropertyProps extends RendererProps {
 export default class extends React.Component<MyPropertyProps> {
     render() {
         const defaultText = isNil(this.props.defaultText) ? '-' : this.props.defaultText;
+        const separator = isNil(this.props.separator) ? '：' : this.props.separator;
 
         return <span className={classNames('my-property', this.props.className)}>
             {
                 this.props.label
-                    ? <span className={classnames('my-property-label', this.props.labelClassName)}>{this.props.render('body', `${this.props.label}${this.props.separator || '：'}`)}</span>
+                    ? <span className={classnames('my-property-label', this.props.labelClassName)}>{this.props.render('body', `${this.props.label}${separator}`)}</span>
                     : null
             }
             <span className={classnames('my-property-value', this.props.textClassName)}>
