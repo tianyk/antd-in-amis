@@ -117,6 +117,19 @@
                     label: 'ID',
                     text: null,
                     minTextWidth: '50px'
+                },
+                {
+                    type: 'my-property',
+                    label: 'ID',
+                    text: [
+                        'abc',
+                        '(',
+                        {
+                            type: 'my-property',
+                            text: 1
+                        },
+                        ')'
+                    ]
                 }
             ]
         }, {}, { theme: 'antd' });

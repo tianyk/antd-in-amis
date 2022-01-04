@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Renderer } from 'amis';
+import { classnames, Renderer } from 'amis';
 import classNames from 'classnames';
+import { isNil } from 'lodash';
 
 import type { RendererProps } from 'amis/lib/factory';
 import type { SchemaNode } from 'amis/lib/types';
@@ -18,7 +19,9 @@ interface MyPropertyProps extends RendererProps {
      * default - 
      */
     defaultText?: string,
-    minTextWidth?: string | number;
+
+    labelClassName?: string,
+    textClassName?: string
 }
 
 @Renderer({
@@ -26,13 +29,17 @@ interface MyPropertyProps extends RendererProps {
 })
 export default class extends React.Component<MyPropertyProps> {
     render() {
+        const defaultText = isNil(this.props.defaultText) ? '-' : this.props.defaultText;
+
         return <span className={classNames('my-property', this.props.className)}>
-            <span className='my-property-label'>{this.props.label}{this.props.separator || '：'}</span>
-            <span className='my-property-value' style={{
-                minWidth: typeof this.props.minTextWidth === 'number'
-                    ? `${this.props.minTextWidth}px`
-                    : this.props.minTextWidth
-            }}>{this.props.text || this.props.defaultText || '-'}</span>
-        </span>
+            {
+                this.props.label
+                    ? <span className={classnames('my-property-label', this.props.labelClassName)}>{this.props.render('body', `${this.props.label}${this.props.separator || '：'}`)}</span>
+                    : null
+            }
+            <span className={classnames('my-property-value', this.props.textClassName)}>
+                {this.props.render('body', this.props.text || defaultText)}
+            </span>
+        </span >
     }
 }
