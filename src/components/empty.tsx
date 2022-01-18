@@ -3,7 +3,7 @@ import { Empty } from 'antd';
 import { Renderer } from 'amis';
 
 import type { SchemaNode } from 'amis/lib/types';
-import { EmptyProps } from 'antd';
+import type { EmptyProps } from 'antd';
 import type { AntdProps } from './types';
 
 import 'antd/lib/empty/style';
