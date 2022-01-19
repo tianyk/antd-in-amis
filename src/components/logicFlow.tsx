@@ -17,7 +17,7 @@ LogicFlow.use(CurvedEdge);
 type Listener = () => void;
 
 interface LogicFlowProps extends FormControlProps {
-    value: GraphConfigData;
+    value?: GraphConfigData | string;
     options: {
         config?: LogicFlowOptions,
 
@@ -86,7 +86,12 @@ export default class extends React.Component<LogicFlowProps, LogicFlowState> {
         });
 
         // 初始化数据
-        logicflow.render(this.props.value);
+        if (typeof this.props.value === 'string') {
+            logicflow.render(JSON.parse(this.props.value));
+        } else {
+            logicflow.render(this.props.value);
+        }
+
         this.setState({
             lf: logicflow
         });
@@ -96,7 +101,12 @@ export default class extends React.Component<LogicFlowProps, LogicFlowState> {
         if (this.props.value !== prevProps.value) {
             const lf = this.state.lf;
             lf?.clearData();
-            lf?.render(this.props.value);
+            // 初始化数据
+            if (typeof this.props.value === 'string') {
+                lf?.render(JSON.parse(this.props.value));
+            } else {
+                lf?.render(this.props.value);
+            }
         }
     }
 
