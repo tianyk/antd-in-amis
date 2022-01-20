@@ -61,6 +61,7 @@ export default class extends React.Component<LogicFlowProps, LogicFlowState> {
                 });
             }
         }
+        // 监听变化，触发onChange
         // @see http://logic-flow.org/api/eventCenterApi.html#%E8%8A%82%E7%82%B9%E4%BA%8B%E4%BB%B6
         [
             'node:delete',
