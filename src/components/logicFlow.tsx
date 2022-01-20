@@ -2,9 +2,7 @@ import * as React from 'react';
 import autoBindReact from 'auto-bind/react';
 import { FormItem, classnames } from 'amis';
 
-import LogicFlow from '@logicflow/core'
-import { CurvedEdge } from '@logicflow/extension';
-
+import type { LogicFlow } from '@logicflow/core';
 import type { FormControlProps } from 'amis/lib/renderers/Form/Item';
 import type { GraphConfigData } from '@logicflow/core';
 import type { Definition as LogicFlowOptions } from '@logicflow/core/types/options';
@@ -12,7 +10,6 @@ import type { Definition as LogicFlowOptions } from '@logicflow/core/types/optio
 import '@logicflow/core/dist/style/index.css';
 import './logicFlow.less';
 
-LogicFlow.use(CurvedEdge);
 
 type Listener = () => void;
 
@@ -47,48 +44,56 @@ export default class extends React.Component<LogicFlowProps, LogicFlowState> {
     }
 
     componentDidMount() {
-        const logicflow = new LogicFlow({
-            ...this.props.options?.config,
-            container: this.lfRef.current!
-        });
-        // 绑定事件
-        if (this.props.options?.listeners) {
+        Promise.all([
+            import('@logicflow/core'),
+            import('@logicflow/extension')
+        ]).then(([{ LogicFlow }, { CurvedEdge }]) => {
+            LogicFlow.use(CurvedEdge);
+
+            const logicflow = new LogicFlow({
+                ...this.props.options?.config,
+                container: this.lfRef.current!
+            });
+
             // 绑定事件
-            for (let eventName in this.props.options.listeners) {
-                const listener = this.props.options.listeners[eventName];
-                logicflow.on(eventName, function (...args) {
-                    listener.apply(this, [...args, logicflow]);
-                });
+            if (this.props.options?.listeners) {
+                // 绑定事件
+                for (let eventName in this.props.options.listeners) {
+                    const listener = this.props.options.listeners[eventName];
+                    logicflow.on(eventName, function (...args: any[]) {
+                        listener.apply(this, [...args, logicflow]);
+                    });
+                }
             }
-        }
-        // 监听变化，触发onChange
-        // @see http://logic-flow.org/api/eventCenterApi.html#%E8%8A%82%E7%82%B9%E4%BA%8B%E4%BB%B6
-        [
-            'node:delete',
-            'node:add',
-            'node:dnd-add',
-            'node:dnd-drag',
-            'node:dragstart',
-            'node:drag',
-            'node:drop',
+            // 监听变化，触发onChange
+            // @see http://logic-flow.org/api/eventCenterApi.html#%E8%8A%82%E7%82%B9%E4%BA%8B%E4%BB%B6
+            [
+                'node:delete',
+                'node:add',
+                'node:dnd-add',
+                'node:dnd-drag',
+                'node:dragstart',
+                'node:drag',
+                'node:drop',
 
-            'edge:add',
-            'edge:delete',
-            'edge:adjust',
-            'edge:exchange-node',
-            'connection:not-allowed',
+                'edge:add',
+                'edge:delete',
+                'edge:adjust',
+                'edge:exchange-node',
+                'connection:not-allowed',
 
-            'text:update'
-        ].forEach((eventName) => {
-            logicflow.on(eventName, this.onChange);
-        });
+                'text:update'
+            ].forEach((eventName) => {
+                logicflow.on(eventName, this.onChange);
+            });
 
-        let graphData = this.props.value;
-        if (typeof graphData === 'string') graphData = JSON.parse(graphData);
-        logicflow?.render(graphData);
+            let graphData = this.props.value;
+            if (typeof graphData === 'string') graphData = JSON.parse(graphData);
+            logicflow?.render(graphData);
 
-        this.setState({
-            lf: logicflow
+            this.setState({
+                lf: logicflow
+            });
         });
     }
 

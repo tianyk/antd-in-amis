@@ -6,7 +6,8 @@ const pkg = require('./package.json');
 module.exports = (env, args) => {
     return {
         output: {
-            filename: `antd${args.mode === 'production' ? '.min' : ''}.js`
+            filename: `antd${args.mode === 'production' ? '.min' : ''}.js`,
+            chunkFilename: '[name][chunkhash].bundle.js'
         },
         module: {
             rules: [
