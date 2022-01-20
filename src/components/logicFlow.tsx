@@ -17,11 +17,10 @@ LogicFlow.use(CurvedEdge);
 type Listener = () => void;
 
 interface LogicFlowProps extends FormControlProps {
-    value?: GraphConfigData | string;
+    value?: GraphConfigData | string,
     options: {
         config?: LogicFlowOptions,
-
-        listeners?: Record<string, Listener>
+        listeners?: Record<string, Listener>,
     }
 }
 
@@ -42,14 +41,12 @@ export default class extends React.Component<LogicFlowProps, LogicFlowState> {
     }
 
     onChange() {
-        console.log('change')
         const lf = this.state.lf;
         const graphData = lf?.getGraphData();
         this.props.onChange(graphData);
     }
 
     componentDidMount() {
-        console.log('componentDidMount');
         const logicflow = new LogicFlow({
             ...this.props.options?.config,
             container: this.lfRef.current!
@@ -85,9 +82,9 @@ export default class extends React.Component<LogicFlowProps, LogicFlowState> {
             logicflow.on(eventName, this.onChange);
         });
 
-        let data = this.props.value;
-        if (typeof data === 'string') data = JSON.parse(data);
-        logicflow?.render(data);
+        let graphData = this.props.value;
+        if (typeof graphData === 'string') graphData = JSON.parse(graphData);
+        logicflow?.render(graphData);
 
         this.setState({
             lf: logicflow
@@ -99,9 +96,9 @@ export default class extends React.Component<LogicFlowProps, LogicFlowState> {
             const lf = this.state.lf;
             lf?.clearData();
 
-            let data = this.props.value;
-            if (typeof data === 'string') data = JSON.parse(data);
-            lf?.render(data);
+            let graphData = this.props.value;
+            if (typeof graphData === 'string') graphData = JSON.parse(graphData);
+            lf?.render(graphData);
         }
     }
 

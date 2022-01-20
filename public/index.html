@@ -222,11 +222,18 @@
                 // },
                 {
                     type: 'form',
-                    debug: true,
+                    // debug: true,
+                    mode: 'horizontal',
+                    horizontal: {
+                        left: 5,
+                        right: 7,
+                        offset: 5
+                    },
                     body: [
                         {
                             type: 'my-logic-flow',
                             name: 'logicflow',
+                            label: 'LogicFlow',
                             value: {
                                 nodes: [
                                     {
